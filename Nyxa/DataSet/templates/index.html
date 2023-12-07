@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+</head>
+<body>
+    <h1>Hello, Welcome to the Chat Application!</h1>
+    
+    <div>
+        <h2>Chat History</h2>
+        <ul>
+            {% for chat in chat_data %}
+                <li>
+                    {{ chat['user'] }}: {{ chat['message'] }}
+                    <form method="post" action="{{ url_for('delete_chat', chat_id=chat['id']) }}">
+                        <button type="submit">Delete</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <form method="post" action="/add_chat">
+        <label for="user_input">Your Message:</label>
+        <input type="text" id="user_input" name="user_input" required>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
